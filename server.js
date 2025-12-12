@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const topicsRoutes = require('./routes/topicRoutes');
 
 // Importa configuración de base de datos (ejecuta el código de conexión)
 require('./config/database');
@@ -16,10 +17,8 @@ app.use(express.json());
 // Archivos estáticos (CSS, JS del cliente)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta de prueba  (para verificar si funciona)
-app.get('/', (request, response) => {
-    response.send('<h1> Hola! El servidor Learn It, Love It está vivo. </h1>');
-});
+// Rutas para temas (GET, POST, DELETE)
+app.use('/', topicsRoutes);
 
 // Iniciar servidor
 const PORT = 3000;
