@@ -30,17 +30,42 @@
             <% } else { %>
                 <% topics.forEach(topic=> { %>
                     <div class="topic-card">
-                        <h3>
-                            <%= topic.title %>
-                                <small>(Votos: <%= topic.votes %>)</small>
-                        </h3>
-
-                        <div class="actions">
+                        <div style="display:flex; justify-content:space-between;">
+                            <h3>
+                                <%= topic.title %>
+                                    <small>(Votos: <%= topic.votes %>)</small>
+                            </h3>
                             <form action="/temas/delete/<%= topic.id %>" method="POST"
-                                onsubmit="return confirm('¿Seguro que quieres borrar este tema?');">
-                                <button type="submit" class="btn-delete">Eliminar</button>
+                                onsubmit="return confirm('¿Borrar tema?');">
+                                <button type="submit" class="btn-delete">X</button>
                             </form>
                         </div>
+
+                        <ul class="link-list">
+                            <% topic.links.forEach(link=> { %>
+                                <li>
+                                    <a href="<%= link.url %>" target="_blank">
+                                        <%= link.title %>
+                                    </a>
+                                    <small>(Votos: <%= link.votes %>)</small>
+
+                                    <form action="/enlaces/delete/<%= link.id %>" method="POST" style="display:inline;">
+                                        <button type="submit"
+                                            style="font-size:0.7em; color:red; border:none; background:none; cursor:pointer;">[borrar]</button>
+                                    </form>
+                                </li>
+                                <% }) %>
+                        </ul>
+
+                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ccc;">
+                            <small>Agregar recurso:</small>
+                            <form action="/temas/<%= topic.id %>/enlaces" method="POST">
+                                <input type="text" name="title" placeholder="Título (ej: Documentación)" required>
+                                <input type="url" name="url" placeholder="https://..." required>
+                                <button type="submit">Añadir</button>
+                            </form>
+                        </div>
+
                     </div>
                     <% }) %>
                         <% } %>
