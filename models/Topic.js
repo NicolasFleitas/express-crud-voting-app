@@ -24,6 +24,15 @@ const Topic = {
         db.run(sql, [id], (err) => {
             callback(err);
         });
+    },
+
+    // Incrementar votos de un tema
+    voteUp: (id, callback) => {
+        // Actualiza la tabla topics, pone la columna votes = votes + 1 donde ID sea X
+        const sql = 'UPDATE topics SET votes = votes + 1 WHERE id = ?';
+        db.run(sql, [id], (err) => {
+            callback(err);
+        });
     }
 };
 

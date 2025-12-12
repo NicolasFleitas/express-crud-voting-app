@@ -24,6 +24,14 @@ const Link = {
         db.run(sql, [id], (err) => {
             callback(err);
         });
+    },
+
+    // Incrementar votos de un enlace
+    voteUp: (id, callback) => {
+        const sql = 'UPDATE links SET votes = votes + 1 WHERE id = ?';
+        db.run(sql, [id], (err) => {
+            callback(err);
+        });
     }
 };
 
