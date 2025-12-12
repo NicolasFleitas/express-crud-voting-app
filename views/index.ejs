@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn It, Love It</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body>
+    <h1>🚀 Learn It, Love It</h1>
+
+    <section>
+        <h2>Nuevo Tema de Aprendizaje</h2>
+        <form action="/temas" method="POST">
+            <input type="text" name="title" placeholder="Ej: Aprender Node.js" required>
+            <button type="submit">Agregar Tema</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Temas Populares</h2>
+
+        <% if (topics.length===0) { %>
+            <p>No hay temas todavía. ¡Sé el primero en agregar uno!</p>
+            <% } else { %>
+                <% topics.forEach(topic=> { %>
+                    <div class="topic-card">
+                        <h3>
+                            <%= topic.title %>
+                                <small>(Votos: <%= topic.votes %>)</small>
+                        </h3>
+
+                        <div class="actions">
+                            <form action="/temas/delete/<%= topic.id %>" method="POST"
+                                onsubmit="return confirm('¿Seguro que quieres borrar este tema?');">
+                                <button type="submit" class="btn-delete">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } %>
+    </section>
+</body>
+
+</html>
