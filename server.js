@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const topicsRoutes = require('./routes/topicRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 // Importa configuración de base de datos (ejecuta el código de conexión)
 require('./config/database');
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas para temas (GET, POST, DELETE)
 app.use('/', topicsRoutes);
+app.use('/api', apiRoutes); // Usar las rutas con prefijo '/api'
 
 // Iniciar servidor
 const PORT = 3000;
