@@ -13,7 +13,7 @@ const Topic = {
     create: (title, callback) => {
         const sql = 'INSERT INTO topics (title) VALUES (?)';
         // Usamos function() aquí para acceder a "this.lastID"
-        db.run(sql, [tittle], function (err) {
+        db.run(sql, [title], function (err) {
             callback(err, this ? this.lastID : null);
         });
     },
