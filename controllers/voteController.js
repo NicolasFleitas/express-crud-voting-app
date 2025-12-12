@@ -1,5 +1,5 @@
-const Topic = require('../models/Topic')
-const Link = require('../models/Link')
+const Topic = require('../models/Topic');
+const Link = require('../models/Link');
 
 const voteController = {
     // Manejar voto para un TEMA
@@ -8,7 +8,7 @@ const voteController = {
 
         Topic.voteUp(id, (err) => {
             if (err) {
-                return response.status(500).json({ sucess: false, error: "Error al votar por el tema" });
+                return response.status(500).json({ success: false, error: "Error al votar por el tema" });
             }
             // Si funciona, enviamos éxito.
             // El frontend lee el "true" y suma el punto visualmente
