@@ -1,6 +1,5 @@
 const Topic = require('../models/Topic');
 const Link = require('../models/Link');
-const { response } = require('express');
 
 const topicController = {
     // GET / - Mostrar todo
