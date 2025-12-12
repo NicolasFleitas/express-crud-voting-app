@@ -20,7 +20,7 @@ function initTables() {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             votes INTEGER DEFAULT 0
-        `);
+        )`);
 
         // Tabla Enlaces ( con FK al tema)
         db.run(`CREATE TABLE IF NOT EXISTS links (
