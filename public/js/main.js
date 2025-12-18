@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 // Deshabilitamos botón temporalmente para evitar doble click rápido
                 button.disabled = true;
+                button.innerText = "Guardando..."; // Feedback visual
 
-                // Llamada Fetch(AJAX)
+                // Enviar petición al Backend (Aquí se guarda en la BD)
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
@@ -29,29 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (data.success) {
-                    // Si todo salio bien, actualiza el número en pantalla
-                    // Construimos el ID del span que queremos buscar: 'votes-topic-5' o 'votes-link-3'
-                    const spanId = `votes-${type}-${id}`;
-                    const counterSpan = document.getElementById(spanId);
-
-                    if (counterSpan) {
-                        // Lee el número actual, y lo convierte a entero, sumamos 
-                        let currentVotes = parseInt(counterSpan.innerText);
-                        counterSpan.innerText = currentVotes + 1;
-
-                        // Efecto visual: parpadeo verde
-                        counterSpan.style.color = 'green';
-                        setTimeout(() => counterSpan.style.color = '', 500);
-                    }
+                    // Recargamos la página.
+                    // Esto forzará al servidor a devolver la lista reordenada con los nuevos votos.
+                    window.location.reload();
                 } else {
-                    alert('Hubo un error al registrar tu voto');
+                    alert('Error del servidor: ' + (data.error || 'Desconocido'));
+                    button.disabled = false;
+                    button.innerText = "👍 Votar";
                 }
+
             } catch (error) {
-                console.error('Error de red:', error);
-                alert('No se pudo conectar con el servidor');
-            } finally {
-                // Rehabilitar botón
+                console.error('Error:', error);
+                alert('Error de conexión');
                 button.disabled = false;
+                button.innerText = "👍 Votar";
             }
         }
     });
