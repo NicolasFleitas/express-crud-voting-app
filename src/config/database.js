@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-const dbName = path.join(__dirname, '../learnit.sqlite');
+const dbName = path.join(__dirname, '../../learnit.sqlite');
 
 const db = new sqlite3.Database(dbName, (err) => {
     if (err) {
